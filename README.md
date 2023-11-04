@@ -1,4 +1,5 @@
 # FancyBoot Plymouth theme
+![Screenshot](Screenshot.jpg)
 ### About FancyBoot
 FancyBoot is a beautiful Plymouth boot screen for Ubuntu, featuring a progress bar, a live boot log, and a colorful animated background.
 
