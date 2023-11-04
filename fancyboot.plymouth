@@ -1,0 +1,9 @@
+[Plymouth Theme]
+Name=Fancy Boot
+Description=A fancy text based progress bar with a colorful background
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/fancyboot
+ScriptFile=/usr/share/plymouth/themes/fancyboot/fancyboot.script
+UseFirmwareBackground=false

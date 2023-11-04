@@ -1,0 +1,102 @@
+Window.SetBackgroundTopColor (0, 0, 0);           
+Window.SetBackgroundBottomColor (0, 0, 0);
+colors=[[225,8,14],[253,144,5],[253,244,7],[66,200,4],[41,194,249],[1,38,243],[93,45,197]];
+mode = Plymouth.GetMode();
+#mode="boot";
+screen_width=Window.GetWidth();
+screen_height=Window.GetHeight();
+pb_length=321;
+jiffies=1;
+r = 0.78;
+g = 0.0;
+b = 0.0;
+duration=100;
+pb_frame_count=50;
+pb_image=Image("progress_bar.png");
+pb_sprite = pb_image.Scale (0 , pb_image.GetHeight());
+pb_sprite=Sprite(pb_image);
+pb_sprite.SetX ((screen_width/2) - (pb_image.GetWidth()/2));
+pb_sprite.SetY ((screen_height/2) - (pb_image.GetHeight()/2));
+wait_image=Image("awaiting.png");
+wait_sprite=Sprite(wait_image);
+wait_sprite.SetOpacity(0);
+wait_sprite.SetX((screen_width/2) - (wait_image.GetWidth()/2));
+wait_sprite.SetY((screen_height/2) - (wait_image.GetHeight()/2));
+log_sprite=Sprite();
+progress = 0;
+fun progress_callback (duration,progress)
+{
+  pb_sprite.SetImage(pb_image.Scale ( progress * pb_length, pb_image.GetHeight()));
+}
+fun status_callback (text)
+{
+  log_image=Image.Text(text,255,255,255,255,"Sans 12","center");
+  log_sprite.SetImage(log_image);
+  log_sprite.SetX((screen_width/2)-(log_image.GetWidth()/2));
+  log_sprite.SetY((screen_height)-(log_image.GetHeight()));
+}
+fun refresh_callback ()
+{
+  if (1) {
+    #color cycle the background
+    if (jiffies >= (duration * 6)){
+    jiffies = 0;
+    r = 0.78;
+    g = 0.0;
+    b = 0.0;
+    }
+
+    jiffies++;
+
+#red
+    if (jiffies > 0 && jiffies <= duration){                      #rgb 0.78, 0.00, 0.00      200, 0, 0
+    r = Math.Clamp((r - 0.0 / duration), 0, 1);
+    g = Math.Clamp((g + 0.78 / duration), 0, 1);
+    }
+    
+#yellow
+    if (jiffies > duration && jiffies <= (duration * 2)){         #rgb 0.78, 0.78, 0.00      200, 200, 0
+    r = Math.Clamp((r - 0.78 / duration), 0, 1);
+    g = Math.Clamp((g - 0.23 / duration), 0, 1);
+    }
+    
+#green
+    if (jiffies > (duration * 2) && jiffies <= (duration * 3)){   #rgb 0.00, 0.55, 0.00      0, 140, 0
+    g = Math.Clamp((g + 0.16 / duration), 0, 1);
+    b = Math.Clamp((b + 0.70 / duration), 0, 1);
+    }
+    
+#cyan
+    if (jiffies > (duration * 3) && jiffies <= (duration * 4)){   #rgb 0.00, 0.71, 0.70      0, 180, 180
+    g = Math.Clamp((g - 0.71 / duration), 0, 1);
+    b = Math.Clamp((b + 0.30 / duration), 0, 1);
+    }
+    
+#blue
+    if (jiffies > (duration * 4) && jiffies <= (duration * 5)){   #rgb 0.00, 0.00, 1.00      0, 0, 255
+    b = Math.Clamp((b - 0.22 / duration), 0, 1);
+    r = Math.Clamp((r + 0.78 / duration), 0, 1);
+    }
+    
+#magenta
+    if (jiffies > (duration * 5) && jiffies <= (duration * 6)){   #rgb 0.78, 0.00, 0.78      200, 0, 200
+    b = Math.Clamp((b - 0.78 / duration), 0, 1);
+    r = Math.Clamp((r + 0.00 / duration), 0, 1);
+    }
+    
+       
+    rt = Math.Clamp((r - 100), 0, 1);
+    gt = Math.Clamp((g - 100), 0, 1);
+    bt = Math.Clamp((b - 100), 0, 1);
+    
+#    Window.SetBackgroundTopColor (rt, gt, bt);                  #gradient - darker at the top of screen
+    Window.SetBackgroundTopColor (r, g, b);                      #no gradient
+    Window.SetBackgroundBottomColor (r, g, b);
+  }
+}
+
+Plymouth.SetBootProgressFunction(progress_callback);
+Plymouth.SetUpdateStatusFunction(status_callback);
+Plymouth.SetRefreshFunction (refresh_callback);
+
+
