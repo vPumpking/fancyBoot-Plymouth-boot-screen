@@ -49,6 +49,6 @@ Do __never__:
 * Delete the `/usr/share/plymouth/themes/fancyboot/installed` file.
 * Delete the `/usr/share/initramfs-tools/scripts/functions.backup` file.
 
--
+---
 
 You can __open__ an issue on https://github.com/vPumpking/fancyBoot-Plymouth-boot-screen if you have any question.
