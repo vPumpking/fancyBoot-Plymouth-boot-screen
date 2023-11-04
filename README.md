@@ -3,6 +3,11 @@
 FancyBoot is a beautiful Plymouth boot screen for Ubuntu, featuring a progress bar, a live boot log, and a colorful animated background.
 
 ### How to use
+#### Download
+Use the official page's download button or open a terminal window and run the following command (ensure that `git` comm	nd is installed first):
+```bash
+git clone https://github.com/vPumpking/fancyBoot-Plymouth-boot-screen.git
+```
 #### Install
 Open a terminal in the theme folder (called `fancyBoot`) and type the following commands:
 ```bash
