@@ -17,11 +17,12 @@ pb_sprite = pb_image.Scale (0 , pb_image.GetHeight());
 pb_sprite=Sprite(pb_image);
 pb_sprite.SetX ((screen_width/2) - (pb_image.GetWidth()/2));
 pb_sprite.SetY ((screen_height/2) - (pb_image.GetHeight()/2));
-wait_image=Image("awaiting.png");
-wait_sprite=Sprite(wait_image);
-wait_sprite.SetOpacity(0);
-wait_sprite.SetX((screen_width/2) - (wait_image.GetWidth()/2));
-wait_sprite.SetY((screen_height/2) - (wait_image.GetHeight()/2));
+#arrow_cur_image=Image("default_cur.png");
+#hand_cur_image=Image("hand_cur.png");
+#cur_sprite=Sprite(arrow_cur_image);
+#cur_sprite.SetX(screen_width-100);
+#cur_sprite.SetY(screen_height-80);
+
 log_sprite=Sprite();
 progress = 0;
 fun progress_callback (duration,progress)
